@@ -3,16 +3,20 @@
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script>
-		
 			var formatter = new Intl.NumberFormat('en-GB', {
 			  style: 'currency',
 			  currency: 'USD',
 			})
 
 			async function rates() {
-				const res = await(fetch('https://api.exchangeratesapi.io/latest?base=GBP').then(res => res.json()))
-				$('#rates').children('p').text("Conversion rate: " + res.rates.USD)
-				return res
+				try {
+					const res = await(fetch('https://api.exchangeratesapi.io/latest?base=GBP').then(res => res.json()))
+					$('#rates').children('p').text("Conversion rate: " + res.rates.USD)
+					return res
+				} 
+				catch (error) {
+					console.log("Something went wrong: " + error);
+				}
 			}
 			
 			async function convert(number) {
