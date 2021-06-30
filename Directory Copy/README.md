@@ -15,4 +15,5 @@ I couldn't figure this out from scratch as I have had little practice with C#. H
 Re. 5) I'm not 100% sure as to what "blocking" is; if it's stopping/pausing whilst the file is transferring, I haven't managed to do this point,
 but I have an idea on how I'd tackle it, e.g. displaying a progress bar during transfer.
 I would also make it hang at the end and give a relevant output to say the operation has been completed.
-I hope this is satisfactory to show at least some of my abilities. Total time spent: ~2 hours.
+I hope this is satisfactory to show at least some of my abilities. 
+Total time spent: ~2 hours.
