@@ -10,11 +10,24 @@
   </head>
   <body>
     <div class="d-flex justify-content-center">
-      <div class="d-flex flex-column">
-        <i class="fas fa-spinner fa-pulse hidden"></i>
-        <label for="">Enter zipcode</label>
-        <input type="text" /> <button type="button" class="btn btn-primary">Submit</button>
-      </div>
+      <form id="postcodeForm">
+        <div class="d-flex flex-column">
+          <i class="fas fa-spinner fa-pulse hidden"></i>
+          <label for="postcode" style="text-align: center;">Enter postcode</label>
+          <input type="text" id="postcode" name="postcode" placeholder="A12 3BC"/>
+          <button type="button" class="btn btn-primary" id="postcodeButton">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="d-flex justify-content-center">
+      <form id="UPRNForm" hidden>
+        <div class="d-flex flex-column">
+          <select id="UPRNSelectbox">
+            <option value="">Select an address</option>
+          </select>
+          <button type="button" class="btn btn-primary" id="UPRNButton">Submit</button>
+        </div>
+      </form>
     </div>
   </body>
   <script src="/src/main.js"></script>
