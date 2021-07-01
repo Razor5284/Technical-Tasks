@@ -1,5 +1,15 @@
 (function() {
 
+  /* TODO:
+   *  - Remove old results in table and dropdown when searching new postcode
+  *   - Fix double click issue on buttons
+  *   - Add errors when entering postcode incorrectly
+  *   - Add message when entering postcode that doesn't have bin collections
+  *   - Unit testing
+  *   - Results filtering
+  *   - UI & CSS improvements
+  */
+
   const state = {
     userInput: null,
     userSelection: null,
@@ -31,7 +41,7 @@
         .then(data => state.fetchedPCData = data);
       if (state.fetchedPCData !== null) outputAddresses();
     } catch(e) {
-      // update ui with error message
+      console.log("failed pc", e);
     }
   })
 
@@ -41,8 +51,10 @@
       const data = fetch(`${state.options.collectionsURL}/${state.userSelection}`)
         .then(res => res.json())
         .then(res => state.fetchedUPRNData = res);
+        console.log(state.fetchedUPRNData)
+        if (state.fetchedUPRNData !== null) outputCollections()
     } catch(e) {
-      // update ui with error message
+      console.log("failed uprn", e);
     }
   })
 
@@ -54,6 +66,23 @@
       option.text = index.SiteShortAddress;
       option.value = index.AccountSiteUprn;
       selectbox.add(option);
+    });
+  }
+
+  function outputCollections() {
+    document.getElementById("collectiondates").removeAttribute("hidden")
+
+    state.fetchedUPRNData.collections.forEach((index, i) => {
+      let date = index.date.substring(0, 10)
+      let table = document.getElementById("collectionTable");
+      let row = table.insertRow()
+      let cell1 = row.insertCell(0)
+      let cell2 = row.insertCell(1)
+      let cell3 = row.insertCell(2)
+
+      cell1.innerHTML = index.service
+      cell2.innerHTML = index.day
+      cell3.innerHTML = date
     });
   }
 
