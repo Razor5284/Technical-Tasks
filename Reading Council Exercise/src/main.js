@@ -2,9 +2,10 @@
 
   /* TODO:
    *  - Remove old results in table and dropdown when searching new postcode
-  *   - Fix double click issue on buttons
   *   - Add errors when entering postcode incorrectly
   *   - Add message when entering postcode that doesn't have bin collections
+  *   - Fix double click issue on buttons
+  *   - Fix reloading on enter button press
   *   - Unit testing
   *   - Results filtering
   *   - UI & CSS improvements
@@ -24,10 +25,11 @@
   const input = document.getElementById("postcode");
   const pcButton = document.getElementById("postcodeButton");
   const uprnButton = document.getElementById("UPRNButton");
-  const selectbox = document.getElementById("UPRNSelectbox")
+  const selectbox = document.getElementById("UPRNSelectbox");
+  const table = document.getElementById("collectionTable");
 
 
-  // using on change event in the possibility of scaling logic in future, i.e. live validation
+  // using on change event in the possibility of scaling logic in future, e.g. live validation
   // input.addEventListener("change", () => {
   //   state.userInput = input.value;
   //   getPostcode();
@@ -36,10 +38,17 @@
   pcButton.addEventListener("click", () => {
     try {
       state.userInput = input.value;
+
       const data = fetch(`${state.options.postcodeURL}/${state.userInput}`)
         .then(res => res.json())
-        .then(data => state.fetchedPCData = data);
+        //.then(data => state.fetchedPCData = data);
+        // state.fetchedPCData
+        data.then(function(result) {
+          state.fetchedPCData = result
+        })
+
       if (state.fetchedPCData !== null) outputAddresses();
+
     } catch(e) {
       console.log("failed pc", e);
     }
@@ -48,18 +57,24 @@
   uprnButton.addEventListener("click", () => {
     try {
       state.userSelection = selectbox.value
+
       const data = fetch(`${state.options.collectionsURL}/${state.userSelection}`)
         .then(res => res.json())
         .then(res => state.fetchedUPRNData = res);
-        console.log(state.fetchedUPRNData)
+
         if (state.fetchedUPRNData !== null) outputCollections()
+
     } catch(e) {
       console.log("failed uprn", e);
     }
   })
 
   function outputAddresses() {
-    document.getElementById("UPRNForm").removeAttribute("hidden")
+    document.getElementById("UPRNForm").removeAttribute("hidden");
+
+    clearTable()
+
+    selectbox.innerHTML = "";
 
     state.fetchedPCData.Addresses.forEach((index, i) => {
       option = document.createElement('option');
@@ -70,11 +85,12 @@
   }
 
   function outputCollections() {
-    document.getElementById("collectiondates").removeAttribute("hidden")
+    document.getElementById("collectiondates").removeAttribute("hidden");
+
+    clearTable()
 
     state.fetchedUPRNData.collections.forEach((index, i) => {
       let date = index.date.substring(0, 10)
-      let table = document.getElementById("collectionTable");
       let row = table.insertRow()
       let cell1 = row.insertCell(0)
       let cell2 = row.insertCell(1)
@@ -84,6 +100,10 @@
       cell2.innerHTML = index.day
       cell3.innerHTML = date
     });
+  }
+
+  function clearTable() {
+    table.getElementsByTagName("tbody")[0].innerHTML = table.rows[0].innerHTML;
   }
 
 })();

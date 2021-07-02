@@ -6,20 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- import bootstrap from cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/src/styles.css">
     <title>Reading Bin Collection Dates</title>
   </head>
   <body>
-    <div class="d-flex justify-content-center">
+    <div class="header">
+      <div class="container">
+        <div class="navbar-brand">
+          <a href="/" to="/" class="navbar-item nuxt-link-active" data-v-73bdaa7c="">
+            <img src="https://www.reading.gov.uk/_nuxt/img/RBCBannerLogo.50affb4.svg" alt="RBC Home" class="reading-logo-top" data-v-73bdaa7c="">
+          </a>
+        </div>
+      </div>
+      <div class="heroimage" style="background:url(https://images.reading.gov.uk/2020/06/TownHall.jpg) center center"></div>
+    </div>
+    <div class="d-flex justify-content-center section">
       <form id="postcodeForm">
         <div class="d-flex flex-column">
           <i class="fas fa-spinner fa-pulse hidden"></i>
-          <label for="postcode" style="text-align: center;">Enter postcode</label>
+          <label for="postcode">Enter postcode</label>
           <input type="text" id="postcode" name="postcode" placeholder="A12 3BC"/>
           <button type="button" class="btn btn-primary" id="postcodeButton">Submit</button>
         </div>
       </form>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center section">
       <form id="UPRNForm" hidden>
         <div class="d-flex flex-column">
           <select id="UPRNSelectbox">
@@ -29,10 +40,10 @@
         </div>
       </form>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center section">
       <div class="d-flex flex-column">
         <div class="flex-column" id="collectiondates" hidden>
-          <h1 style="text-align: center;">Collection Dates</h1>
+          <h1>Collection Dates</h1>
           <div class="d-flex">
             <table class="table" id="collectionTable">
               <tr>
@@ -46,5 +57,5 @@
       </div>
     </div>
   </body>
-  <script src="../src/main.js"></script>
+  <script src="/src/main.js"></script>
 </html>

@@ -1,0 +1,55 @@
+body {
+  background-color: aliceblue;
+}
+
+h1 {
+  text-align: center;
+}
+
+.section {
+  padding: 1em;
+}
+
+label {
+  text-align: center;
+}
+
+.header {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    height: 330px;
+}
+
+.container {
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+}
+
+.heroimage {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  background-size: cover!important;
+  -o-object-fit: cover;
+  object-fit: cover;
+  height: 330px;
+  background-color: #54164f;
+  background-size: cover;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+.reading-logo-top[data-v-73bdaa7c] {
+    max-height: 120px;
+    min-height: 120px;
+}
