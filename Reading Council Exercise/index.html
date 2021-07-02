@@ -47,6 +47,14 @@
       <div class="d-flex flex-column">
         <div class="flex-column" id="collectiondates" hidden>
           <h1>Collection Dates</h1>
+          <div class="section" style="text-align:center">
+            <input type="text" id="tableSearch" onkeyup="searchTable()" placeholder="Search..." size="50">
+            <select id="colNumber">
+              <option value="0">Collection Type</option>
+              <option value="1">Day</option>
+              <option value="2">Date</option>
+            </select>
+          </div>
           <div class="d-flex">
             <table class="table" id="collectionTable">
               <tr>

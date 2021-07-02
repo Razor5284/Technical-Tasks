@@ -44,11 +44,7 @@
 
       const data = fetch(`${state.options.postcodeURL}/${state.userInput}`)
         .then(res => res.json())
-        //.then(data => state.fetchedPCData = data);
-        // state.fetchedPCData
-        data.then(function(result) {
-          state.fetchedPCData = result
-        })
+        .then(data => state.fetchedPCData = data);
 
       if (state.fetchedPCData !== null) outputAddresses();
 
@@ -118,4 +114,26 @@
     var regex = /^RG[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
     return regex.test(postcode);
   }
+
 })();
+
+function searchTable() {
+  var input, filter, table, tr, td, i, txtValue, colNumber;
+  input = document.getElementById("tableSearch");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("collectionTable");
+  tr = table.getElementsByTagName("tr");
+  colNumber = document.getElementById("colNumber").value;
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[colNumber];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
