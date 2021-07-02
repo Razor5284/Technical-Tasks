@@ -1,4 +1,4 @@
-#Reading Council Bin Collections Exercise
+# Reading Council Bin Collections Exercise
 
 All work is my own.
 Created using vanilla JS, HTML/CSS.
