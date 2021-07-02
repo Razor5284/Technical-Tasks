@@ -4,7 +4,6 @@
   *   - Add message when entering postcode that doesn't have bin collections
   *   - Fix double click issue on buttons
   *   - Unit testing
-  *   - Results filtering
   */
 
   const state = {
