@@ -1,14 +1,11 @@
 (function() {
 
   /* TODO:
-   *  - Remove old results in table and dropdown when searching new postcode
-  *   - Add errors when entering postcode incorrectly
   *   - Add message when entering postcode that doesn't have bin collections
   *   - Fix double click issue on buttons
   *   - Fix reloading on enter button press
   *   - Unit testing
   *   - Results filtering
-  *   - UI & CSS improvements
   */
 
   const state = {
@@ -29,12 +26,18 @@
   const table = document.getElementById("collectionTable");
 
 
-  // using on change event in the possibility of scaling logic in future, e.g. live validation
-  // input.addEventListener("change", () => {
-  //   state.userInput = input.value;
-  //   getPostcode();
-  // })
+  // using on change event in for live postcode validation
+  input.addEventListener("change", () => {
+    state.userInput = input.value;
+    if (!checkPostcode()) {
+      document.getElementById("pc-warning").removeAttribute("hidden");
+    } else {
+      document.getElementById("pc-warning").setAttribute("hidden", "true");
+    }
+  })
 
+  // click postcode submit button returns postcode data w/
+  // addresses and UPRN from API, calls outputAddresses
   pcButton.addEventListener("click", () => {
     try {
       state.userInput = input.value;
@@ -54,6 +57,8 @@
     }
   })
 
+  // clicking submit button after selecting an address returns
+  // UPRN from API and calls outputCollections
   uprnButton.addEventListener("click", () => {
     try {
       state.userSelection = selectbox.value
@@ -69,6 +74,7 @@
     }
   })
 
+  // returns addresses in a select box
   function outputAddresses() {
     document.getElementById("UPRNForm").removeAttribute("hidden");
 
@@ -84,6 +90,7 @@
     });
   }
 
+  // returns collection data in a table
   function outputCollections() {
     document.getElementById("collectiondates").removeAttribute("hidden");
 
@@ -106,4 +113,9 @@
     table.getElementsByTagName("tbody")[0].innerHTML = table.rows[0].innerHTML;
   }
 
+  function checkPostcode(postcode) {
+    postcode = state.userInput.replace(/\s/g, "");
+    var regex = /^RG[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
+    return regex.test(postcode);
+  }
 })();

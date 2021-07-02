@@ -53,3 +53,7 @@ img {
     max-height: 120px;
     min-height: 120px;
 }
+
+.warning {
+  color: red;
+}
