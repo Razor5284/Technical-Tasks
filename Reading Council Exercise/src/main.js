@@ -44,7 +44,7 @@
       const data = fetch(`${state.options.postcodeURL}/${state.userInput}`)
         .then(res => res.json())
         .then(data => state.fetchedPCData = data);
-
+        console.log(state.fetchedPCData.Addresses)
       if (state.fetchedPCData !== null) outputAddresses();
 
     } catch(e) {
@@ -77,12 +77,17 @@
 
     selectbox.innerHTML = "";
 
-    state.fetchedPCData.Addresses.forEach((index, i) => {
-      option = document.createElement('option');
-      option.text = index.SiteShortAddress;
-      option.value = index.AccountSiteUprn;
-      selectbox.add(option);
-    });
+    if (state.fetchedPCData.Addresses !== null) {
+      document.getElementById("pc-warning").setAttribute("hidden", "true");
+      state.fetchedPCData.Addresses.forEach((index, i) => {
+        option = document.createElement('option');
+        option.text = index.SiteShortAddress;
+        option.value = index.AccountSiteUprn;
+        selectbox.add(option);
+      });
+    } else {
+      document.getElementById("pc-warning").removeAttribute("hidden");
+    }
   }
 
   // returns collection data in a table
