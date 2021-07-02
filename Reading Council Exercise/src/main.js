@@ -3,7 +3,6 @@
   /* TODO:
   *   - Add message when entering postcode that doesn't have bin collections
   *   - Fix double click issue on buttons
-  *   - Fix reloading on enter button press
   *   - Unit testing
   *   - Results filtering
   */
@@ -25,6 +24,7 @@
   const selectbox = document.getElementById("UPRNSelectbox");
   const table = document.getElementById("collectionTable");
 
+  window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
 
   // using on change event in for live postcode validation
   input.addEventListener("change", () => {

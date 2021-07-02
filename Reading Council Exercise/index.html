@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- import bootstrap from cdn -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/src/styles.css">
+    <link rel="stylesheet" href="../Reading Council Exercise/src/styles.css">
     <title>Reading Bin Collection Dates</title>
   </head>
   <body>
@@ -25,10 +25,10 @@
         <div class="d-flex flex-column">
           <i class="fas fa-spinner fa-pulse hidden"></i>
           <label for="postcode">Enter postcode</label>
-          <input type="text" id="postcode" name="postcode" placeholder="RG2 3BC"/>
-          <p class="warning" id="pc-warning" hidden>
+          <input type="text" id="postcode" name="postcode" maxlength="8" placeholder="RG2 3BC" required/>
+          <span class="warning" id="pc-warning" hidden>
             Please enter a valid Reading postcode.
-          </p>
+          </span>
           <button type="button" class="btn btn-primary" id="postcodeButton">Submit</button>
         </div>
       </form>
